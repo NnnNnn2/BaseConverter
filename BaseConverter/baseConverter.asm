@@ -1,4 +1,4 @@
-﻿.686
+.686
 .model flat
 public _baseConv
 
@@ -84,19 +84,21 @@ _baseConv PROC
 		belowA:
 
 		inc ecx
-		cmp dl, 0
+		cmp eax, 0
 		jne encodeOut
 
-		dec ecx
+		mov esi, ecx		; remember end
 		mov eax, OFFSET output
-		; reversing the output
+
 		reverseLoop:
-			dec ecx
-			mov dl, [ecx]	
+			dec esi
+			cmp esi, OFFSET revOut
+			jb endReverse
+			mov dl, [esi]
 			mov [eax], dl
 			inc eax
-			cmp ecx, OFFSET revOut
-			jne reverseLoop
+			jmp reverseLoop
+		endReverse:
 			mov BYTE PTR [eax], 0
 
 
