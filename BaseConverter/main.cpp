@@ -7,8 +7,13 @@ int main()
 {
 	string inStr;
 	unsigned int inBase, outBase;
-	cin >> inStr >> inBase >> outBase;
-	const char* inStrChr = inStr.c_str();
-	char* outStrChr = baseConv(inStrChr, inBase, outBase);
-	printf("%s", outStrChr);
+	while (true)
+	{
+		cin >> inStr >> inBase >> outBase;
+		if (inStr == "exit" && inBase == -1)
+			break;
+		const char* inStrChr = inStr.c_str();
+		char* outStrChr = baseConv(inStrChr, inBase, outBase);
+		printf("%s\n", outStrChr);
+	}
 }
